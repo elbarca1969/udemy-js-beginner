@@ -39,5 +39,17 @@ $(function() {
 			console.log("dump checkbox", id, chckVal);
 		});
 	};
+
+	// ラジオボタンをコピー
+	var copyRadio = function() {
+		// チェックされている値を取得
+		var sex = $("input[name=sex]:checked").val();
+
+		// チェックを反映
+		$("input[name=sex2]").val([sex]);
+
+		// コンソールに出力
+		console.log("radio", sex);
+	};
 });
 
