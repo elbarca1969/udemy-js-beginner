@@ -63,7 +63,35 @@ $(function() {
 		// コンソールに出力
 		console.log("select", lsts);
 	};
-	
+
+	// テキスト エリアをコピー
+	var copyTextArea = function() {
+		// テキストを取得
+		var free = $("#free").val();
+
+		// テキストを設定
+		$("#free2").val(free);
+
+		// コンソールに出力
+		console.log("textarea", free);
+	};
+
+	// 全てをコピー
+	var copyAll = function() {
+		console.log("--------------------");
+		copyText();		// テキストをコピー
+		dumpCheckbox();	// チェック済みチェックボックスの値を出力
+		copyCheckbox();	// チェックボックスをコピー
+		copyRadio();	// ラジオボタンをコピー
+		copySelect();	// セレクトをコピー
+		copyTextArea();	// テキスト エリアをコピー
+	};
+
+	// ［Copy］ボタンにイベントを登録
+	$("#btnCopy").click(copyAll);
+
+
+
 	// 入力が空か確認
 	var checkBlank = function() {
 		// 入力欄が空か確認
