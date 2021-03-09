@@ -63,5 +63,42 @@ $(function() {
 		// コンソールに出力
 		console.log("select", lsts);
 	};
+	
+	// 入力が空か確認
+	var checkBlank = function() {
+		// 入力欄が空か確認
+		if ($("#name").val() == "") {
+			alert("［名前］が空です。");
+			return true;
+		}
+		if ($("#free").val() == "") {
+			alert("［自由記入］が空です。");
+			return true;
+		}
+
+		// ラジオボタンが選択されていないか確認
+		if ($("input[name=sex]:checked").val() === undefined) {
+			alert("［性別］が選択されていません。");
+			return true;
+		}
+
+		// セレクトが選択されていないか確認
+		if ($("#lst").val() === null) {
+			alert("［リスト］が選択されていません。");
+			return true;
+		}
+
+		// 問題なし
+		return false;
+	};
+
+	// ［Submit］ボタンにイベントを登録
+	$("#f").submit(function() {
+		var isBlank = checkBlank();
+		if (isBlank) {
+			console.log("stop");
+			return false;
+		}
+	});
 });
 
