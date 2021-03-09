@@ -51,5 +51,17 @@ $(function() {
 		// コンソールに出力
 		console.log("radio", sex);
 	};
+
+	// セレクトをコピー
+	var copySelect = function() {
+		// 選択されている値を取得
+		var lsts = $("#lst").val();
+
+		// 選択を反映
+		$("#lst2").val(lsts);
+
+		// コンソールに出力
+		console.log("select", lsts);
+	};
 });
 
