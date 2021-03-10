@@ -20,4 +20,25 @@ $(function() {
 
 	// 初回リサイズ実行
 	resize();
+
+
+	// 説明を表示
+	var showExp = function(target) {
+		// 説明を取得
+		var exp = $(target).find(".exp").text();
+
+		// 説明を表示
+		$("#expArea").val(exp);
+	};
+
+	// 各要素にマウスを載せた/離れた際のイベントを追加
+	$(".col-xs-3").hover(
+		function() {
+			$(this).css("background", "#ffc");	// 背景色を変更
+			showExp(this);	// 説明を表示
+		},
+		function() {
+			$(this).css("background", "#fff");	// 背景色を変更
+		}
+	);
 });
