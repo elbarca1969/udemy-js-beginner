@@ -28,6 +28,32 @@ $(function() {
 		saveMemo();
 	};
 
+	
+	// メモをクッキーに保存
+	var saveMemo = function() {
+		var memoArr = [];
+		$("#memoArea .memo-group").each(function() {
+			// タイトルと本文を取得
+			var $this = $(this);
+			var ttl = $this.find(".memo-title").val();
+			var bdy = $this.find(".memo-body").val();
+
+			// エンコード
+			ttl = encodeURI(ttl);
+			bdy = encodeURI(bdy);
+
+			// オブジェクトを作成して配列に格納
+			var obj = {ttl: ttl, bdy: bdy};
+			memoArr.push(obj);
+		});
+
+		// 保存用の名前と値
+		var cookie_value = JSON.stringify(memoArr);
+
+		// クッキーに保存
+		Cookies.set(cookie_name, cookie_value);
+	};
+
 	// ［追加］ボタンのイベントを登録
 	$("#btnAdd").click(add);
 });
