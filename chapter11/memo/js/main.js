@@ -28,7 +28,16 @@ $(function() {
 		saveMemo();
 	};
 
-	
+	// リセット処理
+	var reset = function() {
+		// 空にする
+		$("#memoArea").empty();
+
+		// クッキーを空に
+		Cookies.remove(cookie_name);
+	};
+
+
 	// メモをクッキーに保存
 	var saveMemo = function() {
 		var memoArr = [];
@@ -54,6 +63,43 @@ $(function() {
 		Cookies.set(cookie_name, cookie_value);
 	};
 
+	// メモの復帰
+	var restoreMemo = function() {
+		// クッキーの読み込み、空なら終了
+		var cookie_value = Cookies.get(cookie_name);
+		if (cookie_value === undefined) return;
+
+		// クッキーの値をオブジェクトに変換、失敗時は終了
+		try {
+			var memoArr = JSON.parse(cookie_value);
+		} catch(e) {
+			console.log("[cookie read error] " + e);
+			return;
+		}
+
+		// メモの構築
+		for (var i = 0; i < memoArr.length; i ++) {
+			// メモのタイトルと本文を取得、デコード
+			var memo = memoArr[i];
+			var ttl = memo.ttl;
+			var bdy = memo.bdy;
+
+			// デコード
+			ttl = decodeURI(ttl);
+			bdy = decodeURI(bdy);
+
+			// 新規メモを末尾に追加
+			appendNewMemo(ttl, bdy);
+		}
+	};
+
+
 	// ［追加］ボタンのイベントを登録
 	$("#btnAdd").click(add);
+
+	// ［リセット］ボタンのイベントを登録
+	$("#btnReset").click(reset);
+
+	// メモの復帰
+	restoreMemo();
 });
